@@ -6,6 +6,7 @@
 			font-family: Verdana;
 		}
 	</style>
+	<!-- javascript:var%20ifra=document.createElement('iframe');ifra.src="http://izze.asmallorange.com/~blitzste/mustache-test/demo.html";ifra.setAttribute("height","230");ifra.setAttribute("width","360");ifra.setAttribute("style","position: absolute; top: 10px; right: 10px; z-index: 1000; background: #fff; border: 3px solid #999;");document.body.appendChild(ifra);ifra.setAttribute("id", 'product-pounce-widget');void(0); -->
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 	<script type="text/javascript" src="mustache.js"></script>
 	
@@ -66,6 +67,11 @@
 			var template = $("#initial").html();
 			var inventoryTemplate = $("#inventoryTemplate").html();
 			var priceTemplate = $("#priceTemplate").html();
+
+			$("a.close").on("click", function() {
+		    $("#product-pounce-widget").remove();					
+        return false;
+			});
 			
 			var html = Mustache.to_html(template, pp_query, {"priceTemplate": priceTemplate, "inventoryTemplate": inventoryTemplate});
 			$('#template-target').html(html);
@@ -73,6 +79,7 @@
 	</script>
 </head>
 <body id="widget">
+	<a href="#">close</a>
 	<div id="template-target"></div>
 </body>
 </html>
