@@ -1,0 +1,78 @@
+<html>
+<head>
+	<title>Mustache demo</title>
+	<style type="text/css">
+		#widget {
+			font-family: Verdana;
+		}
+	</style>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+	<script type="text/javascript" src="mustache/mustache.js"></script>
+	
+	<script id="welcome" type="text/html">
+		<h1>Product Pounce <small>New Product Watch</small></h1>
+		<p>Welcome, {{firstName}}!</p>
+	</script>	
+
+	<script id="inventoryTemplate" type="text/html">
+		<h3>Inventory</h3>
+
+		<p>{{inventory_info.selector}}</p>
+		<p>{{inventory_info.value}}</p>
+	</script>
+
+	<script id="priceTemplate" type="text/html">
+		<h3>Price</h3>
+
+		<p>{{price_info.selector}}</p>
+		<p>{{price_info.value}}</p>
+	</script>
+
+	<script id="initial" type="text/html">
+		<h1>My Widget <small>New Widget Data</small></h1>
+		<h2>{{title}}!</h2>
+
+		<div id="price-wrapper">
+			{{> priceTemplate}}
+		</div>
+
+		<div id="inventory-wrapper">
+			{{> inventoryTemplate}}
+		</div>
+	</script>	
+
+	<script type="text/javascript">
+		var pp_query = {
+		    "url": "http://www.bonobos.com/blue-tattersall-wrinkle-resistant-slim-shirts-for-men-daily-grind",
+		    "domain": "bonobos.com",
+		    "ruleset_key": 123,
+		    "title": "Daily Grind Slim - Blue Tattersall",
+		    "hero_image": "http://dz7abk7jlh1eg.cloudfront.net/media/catalog/product/cache/1/image/454x627/9df78eab33525d08d6e5fb8d27136e95/s/h/shrt_wf_dress_bluetattersal_slim_tall.jpg",
+		    "price_info": {
+		        "display_name": "Price",
+		        "selector": ".price",
+		        "value": "$88.00"
+		    },
+		    "inventory_info": {
+		    	"display_name": "Inventory",
+		    	"selector": "#stock",
+		    	"value": "In Stock"
+		    }
+		}
+
+
+
+		$(document).ready(function() {
+			var template = $("#initial").html();
+			var inventoryTemplate = $("#inventoryTemplate").html();
+			var priceTemplate = $("#priceTemplate").html();
+			
+			var html = Mustache.to_html(template, pp_query, {"priceTemplate": priceTemplate, "inventoryTemplate": inventoryTemplate});
+			$('#template-target').html(html);
+		})
+	</script>
+</head>
+<body id="widget">
+	<div id="template-target"></div>
+</body>
+</html>
